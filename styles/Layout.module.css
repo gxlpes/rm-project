@@ -1,0 +1,39 @@
+.header {
+  position: fixed;
+  backdrop-filter: saturate(180%) blur(5px);
+  background: hsla(0, 0%, 100%, 0.8);
+  width: 100%;
+}
+
+.header .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-inline: auto;
+  padding-inline: 5rem;
+}
+
+.header .logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header .nav {
+  display: flex;
+}
+
+.header img {
+  width: 50px;
+  height: auto;
+}
+
+.footer {
+  padding: 2rem 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}

@@ -1,12 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState } from 'react';
-import { AiFillGithub } from 'react-icons/ai';
 import styles from '../styles/Home.module.css';
-import { Character } from '../types/CharacterInterface';
-
-
 
 const Home: NextPage = ({ data }: any) => {
 
@@ -29,14 +24,10 @@ const Home: NextPage = ({ data }: any) => {
           Data about characters and their life
         </p>
 
-        <Link href="/list"><button>Browse characters</button></Link>
+        <Link href="/list/1"><button>Browse characters</button></Link>
 
       </main>
 
-      <footer className={styles.footer}>
-        <a href="https://github.com/gxlpes" target="_blank"><AiFillGithub /></a>
-        <p>Coded by Guilherme Lopes</p>
-      </footer>
     </div>
   )
 }
