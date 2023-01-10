@@ -43,9 +43,29 @@
 .card:hover,
 .card:focus,
 .card:active {
-  color: #6b6b6b;
-  border-color: #6b6b6b;
+  color: var(--main-grey);
+  border-color: var(--main-grey);
   cursor: pointer;
+}
+
+.paginationButtons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.paginationButtons a {
+  padding-inline: 1rem;
+  cursor: pointer;
+}
+
+.paginationButtons a:hover {
+  opacity: 0.5;
+}
+
+.paginationActive {
+  font-weight: bolder;
 }
 
 @media (max-width: 600px) {

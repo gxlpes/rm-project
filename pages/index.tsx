@@ -31,6 +31,8 @@ const Home: NextPage = ({ data }: any) => {
               Data about characters and their life
             </h3>
 
+            <Link href="/list/1"><button>Browse characters</button></Link>
+
           </div>
 
           <div className={styles.image}>
@@ -38,7 +40,6 @@ const Home: NextPage = ({ data }: any) => {
           </div>
         </div>
 
-        <Link href="/list/1"><button>Browse characters</button></Link>
 
       </main>
 

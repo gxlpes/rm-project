@@ -35,6 +35,7 @@ const List: NextPage = ({ data }: any) => {
     const { info, results: defaultResults } = data;
     const [pageNumber, setPageNumber] = useState(0);
     const router = useRouter();
+    console.log(info);
 
     const changePage = ({ selected }: { selected: number }) => {
         setPageNumber(selected);
@@ -67,10 +68,10 @@ const List: NextPage = ({ data }: any) => {
             <ReactPaginate
                 previousLabel={"Previous"}
                 nextLabel={"Next"}
-                pageCount={42}
+                pageCount={info.pages}
                 onPageChange={changePage}
-                containerClassName={"paginationButtons"}
-                activeClassName={"paginationActive"} />
+                containerClassName={styles.paginationButtons}
+                activeClassName={styles.paginationActive} />
         </>)
 }
 

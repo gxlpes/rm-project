@@ -1,7 +1,8 @@
 .hero {
   display: flex;
   flex-direction: row;
-  gap: 2rem;
+  align-items: center;
+  gap: 10rem;
 }
 
 .info {
@@ -9,6 +10,21 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 1rem;
+  width: 50%;
+}
+
+.hero button {
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 4px;
+  background-color: transparent;
+  border: 1px solid var(--main-grey);
+  transition: all 0.3s ease-in-out;
+}
+
+.hero button:hover {
+  cursor: pointer;
+  opacity: 0.5;
 }
 
 .image {
