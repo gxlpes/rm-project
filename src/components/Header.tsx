@@ -1,13 +1,16 @@
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import Image from "next/image"
 import styles from "../../styles/Layout.module.css"
 import logo from "../../public/logo.png"
 
 const Header = () => {
+    const [hiddenMenu, setHiddenMenu] = useState(false);
+
     return (
         <header className={styles.header}>
-            <div className={styles.content}>
+
+            <nav className={styles.content}>
 
                 <div className={styles.logo}>
                     <Link href="/">
@@ -16,12 +19,15 @@ const Header = () => {
                     <p>Rick and Morty Wiki</p>
                 </div>
 
-                <nav className={styles.nav}>
+                <div className={hiddenMenu ? "invisible" : styles.links}>
                     <Link href="/list/1">Browse</Link>
                     <Link href="/about">About</Link>
-                </nav>
+                </div>
 
-            </div>
+                <span className={styles.toggle} onClick={() => setHiddenMenu(!hiddenMenu)}>X</span>
+
+
+            </nav>
         </header>
     )
 }
