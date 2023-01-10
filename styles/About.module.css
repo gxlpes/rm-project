@@ -1,0 +1,8 @@
+.container {
+  display: flex;
+  gap: 2rem;
+}
+
+.description {
+  line-height: 2rem;
+}

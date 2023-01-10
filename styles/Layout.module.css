@@ -6,11 +6,12 @@
 }
 
 .header .content {
+  padding: 1rem 5rem 1rem 5rem;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-inline: auto;
-  padding-inline: 5rem;
 }
 
 .header .logo {
@@ -19,13 +20,25 @@
   gap: 1rem;
 }
 
-.header .nav {
-  display: flex;
+.header img {
+  width: 20px;
+  height: auto;
+  transition: all 0.3s ease-in-out;
 }
 
-.header img {
-  width: 50px;
-  height: auto;
+.header img:hover {
+  opacity: 0.5;
+}
+
+.nav {
+  display: flex;
+  gap: 4rem;
+  transition: all 0.3s ease-in-out;
+}
+
+.nav :hover {
+  cursor: pointer;
+  opacity: 0.5;
 }
 
 .footer {

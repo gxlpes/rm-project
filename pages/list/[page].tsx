@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { Character } from '../../src/types/CharacterInterface';
-import styles from "../../styles/Home.module.css";
+import styles from "../../styles/List.module.css";
 
 const defaultEndpoint = 'https://rickandmortyapi.com/api/character';
 
@@ -44,7 +44,7 @@ const List: NextPage = ({ data }: any) => {
 
     return (
         <>
-            <main className={styles.main}>
+            <main>
                 <ul className={styles.grid}>
                     {defaultResults.map((character: Character) => {
 
@@ -61,10 +61,6 @@ const List: NextPage = ({ data }: any) => {
                         );
                     })}
                 </ul>
-
-                <div>
-                    <Link href={"/list/2"}>2</Link>
-                </div>
 
             </main>
 
