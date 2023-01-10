@@ -39,7 +39,6 @@ const List: NextPage = ({ data }: any) => {
 
     const changePage = ({ selected }: { selected: number }) => {
         setPageNumber(selected);
-        router.push(`/list/${selected + 1}`);
         console.log(selected);
     }
 
