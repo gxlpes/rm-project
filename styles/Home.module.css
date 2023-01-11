@@ -1,32 +1,19 @@
 .hero {
+  padding-top: 6rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 3rem;
 }
 
-@media (max-width: 600px) {
-  .hero {
-    width: 100%;
-    flex-direction: column-reverse;
-  }
-}
-
-.info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-  width: 50%;
-}
-
 .hero button {
   border: none;
-  padding: 1rem 2rem;
+  padding: 0.5rem 1rem;
   border-radius: 4px;
   background-color: transparent;
-  border: 1px solid var(--main-grey);
   transition: all 0.3s ease-in-out;
+
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .hero button:hover {
@@ -34,9 +21,34 @@
   opacity: 0.5;
 }
 
+.container {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../public/image.jpg");
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.info {
+  padding-inline: 5rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
 .image {
-  position: relative;
-  width: 60vw;
-  height: 30vw;
-  object-fit: cover;
+  width: 100vw;
+  height: 100vw;
+}
+
+.image img {
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 600px) {
+  .container {
+    background-position: -375px;
+  }
 }

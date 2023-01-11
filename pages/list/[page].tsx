@@ -1,4 +1,5 @@
 import type { GetServerSidePropsContext, NextPage } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -8,11 +9,23 @@ import styles from "../../styles/List.module.css";
 
 const defaultEndpoint = 'https://rickandmortyapi.com/api/character';
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-    const { params } = context;
-    const actualPage = params!.page;
+export async function getStaticPaths() {
+    const res = await fetch(defaultEndpoint);
+    const data = await res.json();
 
-    const res = await fetch(defaultEndpoint + `/?page=${actualPage}`);
+    const pages = Array.from({ length: data.info.pages }, (_, i) => i + 1);
+
+
+    const pathsWithParams = pages.map((page: any) => ({ params: { page: page.toString() } }));
+    return {
+        paths: pathsWithParams,
+        fallback: false,
+    };
+}
+
+export async function getStaticProps(context: GetServerSidePropsContext) {
+    const { params } = context;
+    const res = await fetch(defaultEndpoint + `/?page=${params!.page}`);
     const data = await res.json();
 
     if (!data || data === undefined) {
@@ -20,22 +33,22 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
             redirect: {
                 destination: '/',
                 permanent: false,
-            },
+            }
         }
     }
 
     return {
         props: {
-            data
+            data: data || null
         }
     }
 }
 
-const List: NextPage = ({ data }: any) => {
-    const { info, results: defaultResults } = data;
+const ListCharacter: NextPage = ({ data }: any) => {
+    const { info, results } = data;
     const [pageNumber, setPageNumber] = useState(0);
-    const router = useRouter();
-    console.log(info);
+
+
 
     const changePage = ({ selected }: { selected: number }) => {
         setPageNumber(selected);
@@ -46,12 +59,12 @@ const List: NextPage = ({ data }: any) => {
         <>
             <main>
                 <ul className={styles.grid}>
-                    {defaultResults.map((character: Character) => {
+                    {results.map((character: Character) => {
 
                         return (
                             <li key={character.id} className={styles.card}>
                                 <Link href={`/character/${character.id}`}>
-                                    <img src={character.image} alt={`${character.name}-image`} />
+                                    <Image src={character.image} alt={`${character.name}-image`} width={100} height={100} />
                                     <div>
                                         <h2>{character.name}</h2>
                                         <p>Species - {character.species}</p>
@@ -71,7 +84,9 @@ const List: NextPage = ({ data }: any) => {
                 onPageChange={changePage}
                 containerClassName={styles.paginationButtons}
                 activeClassName={styles.paginationActive} />
-        </>)
+        </>
+
+    )
 }
 
-export default List
+export default ListCharacter;

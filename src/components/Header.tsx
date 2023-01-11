@@ -19,7 +19,7 @@ const Header = () => {
                     <p>Rick and Morty Wiki</p>
                 </div>
 
-                <div className={hiddenMenu ? "invisible" : styles.links}>
+                <div className={hiddenMenu ? styles.mobile : styles.desktop}>
                     <Link href="/list/1">Browse</Link>
                     <Link href="/about">About</Link>
                 </div>

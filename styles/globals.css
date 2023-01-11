@@ -5,6 +5,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
     Helvetica Neue, sans-serif;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 :root {
@@ -46,6 +47,13 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
 }
 
 h3 {
