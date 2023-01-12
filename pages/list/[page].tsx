@@ -40,15 +40,14 @@ export async function getStaticProps(context: GetServerSidePropsContext) {
     return {
         props: {
             data: data || null
-        }
+        },
+        revalidate: 2_592_000
     }
 }
 
 const ListCharacter: NextPage = ({ data }: any) => {
     const { info, results } = data;
     const [pageNumber, setPageNumber] = useState(0);
-
-
 
     const changePage = ({ selected }: { selected: number }) => {
         setPageNumber(selected);
