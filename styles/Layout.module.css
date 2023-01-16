@@ -1,7 +1,5 @@
 .header {
   position: fixed;
-  backdrop-filter: saturate(180%) blur(5px);
-  background: hsla(0, 0%, 100%, 0.8);
   width: 100%;
 }
 
@@ -19,10 +17,11 @@
   gap: 1rem;
 }
 
-.header img {
+.header svg {
   width: 20px;
   height: auto;
   transition: all 0.3s ease-in-out;
+  fill: black;
 }
 
 .header img:hover {
