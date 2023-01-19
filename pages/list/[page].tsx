@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import { Character } from '../../src/types/CharacterInterface';
+import { Character } from '../../src/types/api/CharacterInterface';
 import styles from "../../styles/List.module.css";
 
 const defaultEndpoint = 'https://rickandmortyapi.com/api/character';

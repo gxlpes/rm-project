@@ -1,10 +1,8 @@
 import Link from 'next/link'
-import React, { useState } from 'react'
-import Image from "next/image"
-import styles from "../../styles/Layout.module.css"
-import logo from "../../public/logo.svg"
 import { useRouter } from 'next/router'
-
+import { useState } from 'react'
+import styles from "../../../styles/Layout.module.css"
+import Button from '../ui/Button'
 
 const Header = () => {
     const [hiddenMenu, setHiddenMenu] = useState(false);
@@ -48,6 +46,7 @@ c-28 24 -93 82 -145 131 -253 233 -749 681 -770 697 -10 7 -20 10 -23 5z"/>
                 <div className={hiddenMenu ? styles.mobile : styles.desktop}>
                     <Link href="/list/1">Browse</Link>
                     <Link href="/about">About</Link>
+                    <Link href="/about" className="btn"><Button title={"Login"} /></Link>
                 </div>
 
                 <span className={styles.toggle} onClick={() => setHiddenMenu(!hiddenMenu)}>X</span>

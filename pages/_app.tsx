@@ -1,8 +1,8 @@
 import type { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
-import Footer from '../src/components/Footer';
-import Header from '../src/components/Header';
-import '../styles/globals.css';
+import Footer from '../src/components/nav/Footer';
+import Header from '../src/components/nav/Header';
+import '../styles/global/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
