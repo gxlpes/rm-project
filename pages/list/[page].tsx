@@ -5,11 +5,12 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { Character } from '../../src/types/api/CharacterInterface';
-import styles from "../../styles/List.module.css";
+import styles from "../../styles/pages/List.module.css";
 
 const defaultEndpoint = 'https://rickandmortyapi.com/api/character';
 
 export async function getStaticPaths() {
+
     const res = await fetch(defaultEndpoint);
     const data = await res.json();
 
@@ -19,7 +20,7 @@ export async function getStaticPaths() {
     const pathsWithParams = pages.map((page: any) => ({ params: { page: page.toString() } }));
     return {
         paths: pathsWithParams,
-        fallback: false,
+        fallback: true,
     };
 }
 
@@ -47,11 +48,16 @@ export async function getStaticProps(context: GetServerSidePropsContext) {
 
 const ListCharacter: NextPage = ({ data }: any) => {
     const { info, results } = data;
+    const router = useRouter();
     const [pageNumber, setPageNumber] = useState(0);
 
     const changePage = ({ selected }: { selected: number }) => {
         setPageNumber(selected);
         console.log(selected);
+    }
+
+    if (router.isFallback) {
+        return <div>Loading...</div>
     }
 
     return (
@@ -63,7 +69,7 @@ const ListCharacter: NextPage = ({ data }: any) => {
                         return (
                             <li key={character.id} className={styles.card}>
                                 <Link href={`/character/${character.id}`}>
-                                    <Image src={character.image} alt={`${character.name}-image`} width={100} height={100} />
+                                    <Image src={character.image} alt={`${character.name}-image`} width={250} height={350} />
                                     <div>
                                         <h2>{character.name}</h2>
                                         <p>Species - {character.species}</p>

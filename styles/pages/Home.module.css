@@ -1,16 +1,17 @@
 .black {
-  background-color: rgba(0, 0, 0, 0.407);
+  position: absolute;
   width: 100vw;
   height: 100vh;
-  position: absolute;
-  top: 0;
-  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.407);
   z-index: 1;
 }
 
 .container {
-  background-image: url("../public/image.jpg");
+  position: absolute;
+  top: 0;
   height: 100vh;
+  width: 100vw;
+  background-image: url("../../public/image.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -52,5 +53,9 @@
 @media (max-width: 600px) {
   .container {
     background-position: -375px;
+  }
+
+  .hero {
+    align-items: flex-start;
   }
 }

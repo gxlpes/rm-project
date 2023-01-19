@@ -2,11 +2,10 @@
   padding: 0.5rem 1rem;
   border-radius: 2px;
   background-color: transparent;
-  border: 2px solid white;
-  color: white;
+  color: inherit;
+  border: 1px solid var(--font-light);
   font-family: inherit;
   font-weight: bold;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   transition: all 0.3s ease-in-out;
 }
 

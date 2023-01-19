@@ -1,12 +1,27 @@
 .header {
-  z-index: 9999;
-  position: fixed;
   width: 100%;
+  position: sticky;
+  z-index: 999;
+  top: 0;
+}
+
+.home {
+  color: var(--font-light);
+}
+
+.blur {
+  color: var(--font-dark);
+  -webkit-backdrop-filter: saturate(180%) blur(5px);
+  backdrop-filter: saturate(180%) blur(5px);
+  background: hsla(0, 0%, 100%, 0.8);
+}
+
+.blur button {
+  border: 1px solid var(--font-dark);
 }
 
 .content {
   padding: 1rem 5rem 1rem 5rem;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,7 +37,7 @@
   width: 20px;
   height: auto;
   transition: all 0.3s ease-in-out;
-  fill: black;
+  fill: var(--font-dark);
 }
 
 .header img:hover {
@@ -39,16 +54,6 @@
 .desktop :not(:last-child):hover {
   cursor: pointer;
   opacity: 0.5;
-}
-
-.footer {
-  padding: 2rem 0;
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
 }
 
 .toggle {
