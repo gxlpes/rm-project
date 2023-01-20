@@ -1,8 +1,7 @@
-import { GetServerSideProps, GetServerSidePropsContext, NextPage } from 'next';
+import { GetServerSidePropsContext, NextPage } from 'next';
 import { useRouter } from 'next/router';
-import React from 'react'
-import { DEFAULT_API_ENDPOINT, CHARACTER_RESOURCE_ENDPOINT } from '../../src/common/constants';
-import styles from "../../styles/Character.module.css"
+import { CHARACTER_RESOURCE_ENDPOINT, DEFAULT_API_ENDPOINT } from '../../src/common/constants';
+import styles from "../../styles/pages/Character.module.css";
 
 
 export async function getStaticPaths() {
@@ -49,7 +48,6 @@ const PageCharacter: NextPage = ({ data }: any) => {
     return (
         <>
             <div className={styles.name}>{data!.name}</div>
-            <p>a</p>
         </>
     )
 }

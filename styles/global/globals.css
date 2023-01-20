@@ -80,8 +80,9 @@ h3 {
   text-align: left;
 }
 
-* {
+*:not(header, nav) {
   box-sizing: border-box;
+  transition: all 0.3s ease-in-out;
 }
 
 .invisible {
