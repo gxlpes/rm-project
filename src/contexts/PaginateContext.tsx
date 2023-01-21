@@ -2,11 +2,10 @@ import { useRouter } from "next/router";
 import { createContext, useEffect, useState } from "react";
 import { IPaginateContext } from "../types/contexts/IPaginateContext";
 import { IChildren } from "../types/default/Children";
-import { IPaginate } from "../types/ui/PaginateInterface";
 
-export const PaginateContext = createContext<IPaginate>({} as IPaginate)
+export const PaginateContext = createContext<IPaginateContext>({} as IPaginateContext)
 
-export const PaginateContextProvider = ({ children, currentPage }: IPaginateContext) => {
+export const PaginateContextProvider = ({ children, currentPage }: IChildren | any) => {
     const router = useRouter();
     const [minPageLimit, setMinPageLimit] = useState<number>(0)
     const [maxPageLimit, setMaxPageLimit] = useState<number>(5)

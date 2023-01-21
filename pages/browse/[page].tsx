@@ -2,12 +2,12 @@ import type { GetStaticPropsContext, NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useRef, useState } from 'react';
-import ReactPaginate from 'react-paginate';
+import { useRef, useState, useContext, useEffect } from 'react';
 import Paginate from '../../src/components/paginate/Paginate';
 import { PaginateContextProvider } from '../../src/contexts/PaginateContext';
+import { SearchContext } from '../../src/contexts/SearchContext';
 import { Character } from '../../src/types/api/CharacterInterface';
-import styles from "../../styles/pages/List.module.css";
+import styles from "../../styles/pages/List.module.css"
 
 const defaultEndpoint = 'https://rickandmortyapi.com/api/character';
 
@@ -28,6 +28,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
     const { params } = context;
+    console.log(params);
     const res = await fetch(defaultEndpoint + `/?page=${params!.page}`);
     const data = await res.json();
 
@@ -49,33 +50,37 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 }
 
 const ListCharacter: NextPage = ({ data }: any) => {
-    const { info, results } = data;
+    const { results } = data;
     const router = useRouter();
-    const [pageNumber, setPageNumber] = useState(0);
     const inputRef = useRef<HTMLInputElement>(null);
     const [clientFetch, setClientFetch] = useState<any>();
+    const [userInput, setUserInput] = useState<any>();
+    console.log();
 
-    const changePage = async ({ selected }: { selected: number }) => {
-        setPageNumber(selected);
-        if (clientFetch != undefined) {
-            const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${selected + 1}&name=${inputRef}`);
-            const { results: testx, info } = await response.json();
-            setClientFetch(testx);
-        }
 
-    }
+    const [isLoading, setLoading] = useState(false)
+
 
     if (router.isFallback) {
         return <div>Loading...</div>
     }
 
     const handleOnSubmit = async (e: any) => {
-        e.preventDefault();
-        const response = await fetch(`https://rickandmortyapi.com/api/character/?name=${e.target[0].value}`);
-        const { results: testx, info } = await response.json();
-        console.log(info)
-        setClientFetch(testx);
+        setUserInput(e.target[0].value);
+        router.push(`/browse/1/name=${e.target0[0].value}`)
     }
+
+    useEffect(() => {
+        {
+            setLoading(true)
+            fetch(`https://rickandmortyapi.com/api/character/?name=${router.asPath.substring(router.asPath.indexOf("=") + 1)}`)
+                .then((res) => res.json())
+                .then((data) => {
+                    setClientFetch(data)
+                    setLoading(false)
+                })
+        }
+    }, [])
 
     return (
         <>
@@ -85,9 +90,10 @@ const ListCharacter: NextPage = ({ data }: any) => {
                         <input ref={inputRef} name="query" type="search" />
                         <button>Search</button>
                     </form>
-                    {clientFetch ?
+
+                    {clientFetch && !isLoading ?
                         <ul className={styles.grid}>
-                            {clientFetch.map((character: Character) => {
+                            {clientFetch.results.map((character: Character) => {
                                 return (
                                     <li key={character.id} className={styles.card}>
                                         <Link href={`/character/${character.id}`}>

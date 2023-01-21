@@ -49,6 +49,11 @@
   cursor: pointer;
 }
 
+.card img {
+  height: auto;
+  width: 100%;
+}
+
 .paginationButtons {
   display: flex;
   gap: 1rem;

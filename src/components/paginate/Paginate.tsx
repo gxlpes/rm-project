@@ -12,7 +12,7 @@ const Paginate = () => {
             {minPageLimit >= 1 && <li className={styles.ellipses} onClick={decreaseSectionPaginate}>&hellip;</li>}
             {pages && pages.map(page => {
                 if (page <= maxPageLimit && page > minPageLimit)
-                    return <Item page={page} currentPage={currentPage} handlePageClick={handlePageClick} />
+                    return <Item key={page} page={page} currentPage={currentPage} handlePageClick={handlePageClick} />
             })}
             {pages.length > maxPageLimit && <li className={styles.ellipses} onClick={increaseSectionPaginate}>&hellip;</li>}
             <button onClick={nextPage}>Next</button>

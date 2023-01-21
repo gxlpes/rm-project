@@ -41,7 +41,7 @@ const Header = () => {
                     <p>Rick and Morty Wiki</p>
                 </div>
                 <div className={verticalNav ? styles.mobile : styles.desktop}>
-                    <Link href="/list/1" onClick={verticalNav ? () => setVerticalNav(false) : undefined}>Browse</Link>
+                    <Link href="/browse/1" onClick={verticalNav ? () => setVerticalNav(false) : undefined}>Browse</Link>
                     <Link href="/about">About</Link>
                     <button onClick={() => router.push("/login")}>Login</button>
                 </div>

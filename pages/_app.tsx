@@ -2,6 +2,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Footer from '../src/components/layout/Footer';
 import Header from '../src/components/layout/Header';
+import { SearchContextProvider } from '../src/contexts/SearchContext';
 import '../styles/global/globals.css';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -15,7 +16,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
       </>
       <Header />
-      <Component {...pageProps} />
+      <SearchContextProvider>
+        <Component {...pageProps} />
+      </SearchContextProvider>
       <Footer />
     </>
   )
