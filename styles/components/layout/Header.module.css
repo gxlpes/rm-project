@@ -36,8 +36,6 @@
 .header svg {
   width: 20px;
   height: auto;
-  transition: all 0.3s ease-in-out;
-  fill: var(--font-dark);
 }
 
 .header img:hover {
@@ -48,7 +46,6 @@
   display: flex;
   align-items: center;
   gap: 4rem;
-  transition: all 0.3s ease-in-out;
 }
 
 .desktop :not(:last-child):hover {
@@ -63,6 +60,24 @@
 @media (max-width: 600px) {
   .desktop {
     display: none;
+  }
+
+  .toggle {
+    position: relative;
+    display: block;
+    z-index: 2;
+  }
+
+  .toggle svg {
+    fill: var(--font-light);
+  }
+
+  .dark svg {
+    fill: var(--font-dark);
+  }
+
+  .content {
+    padding: 1rem 2rem 1rem 2rem;
   }
 
   .mobile {
@@ -83,14 +98,18 @@
     right: 0;
     bottom: 0;
 
+    color: var(--font-dark);
     background-color: white;
     z-index: 1;
+    animation: slideUp 1s ease-in-out;
   }
+}
 
-  .toggle {
-    position: relative;
-    display: block;
-    cursor: pointer;
-    z-index: 2;
+@keyframes slideUp {
+  from {
+    transform: translateY(-2000px);
+  }
+  to {
+    transform: translateY(0);
   }
 }

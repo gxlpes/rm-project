@@ -1,22 +1,22 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { GiHamburgerMenu } from "react-icons/gi"
 import styles from "../../../styles/layout/Header.module.css"
-import Button from '../ui/Button'
 
 const Header = () => {
-    const { asPath } = useRouter();
-    const [hiddenMenu, setHiddenMenu] = useState(false);
+    const router = useRouter();
+    const [verticalNav, setVerticalNav] = useState(false);
 
     return (
-        <header className={`${styles.header} ${(asPath == "/") ? styles.home : styles.blur}`}>
+        <header className={`${styles.header} ${(router.asPath == "/") ? styles.home : styles.blur}`}>
             <nav className={styles.content}>
                 <div className={styles.logo}>
                     <Link href="/">
                         <svg viewBox="0 0 388.000000 500.000000">
                             <g transform="translate(0.000000,500.000000) scale(0.100000,-0.100000)"
                                 stroke="none"
-                                fill={asPath == '/' ? "white" : undefined}>
+                                fill={router.asPath == '/' ? "white" : undefined}>
                                 <path d="M1107 4843 c-6 -9 -3 -41 18 -178 8 -55 35 -239 60 -410 24 -170 55
                                                 -377 69 -460 13 -82 28 -179 32 -214 l7 -63 -54 6 c-30 3 -117 14 -194 25
                                                 -397 56 -721 102 -818 117 -59 9 -109 15 -112 13 -2 -3 34 -54 81 -114 47 -61
@@ -40,14 +40,14 @@ const Header = () => {
                     </Link>
                     <p>Rick and Morty Wiki</p>
                 </div>
-                <div className={hiddenMenu ? styles.mobile : styles.desktop}>
-                    <Link href="/list/1">Browse</Link>
+                <div className={verticalNav ? styles.mobile : styles.desktop}>
+                    <Link href="/list/1" onClick={verticalNav ? () => setVerticalNav(false) : undefined}>Browse</Link>
                     <Link href="/about">About</Link>
-                    <Link href="/about" className="btn"><Button title={"Login"} /></Link>
+                    <button onClick={() => router.push("/login")}>Login</button>
                 </div>
-                <span className={styles.toggle} onClick={() => setHiddenMenu(!hiddenMenu)}>X</span>
+                <span className={`${styles.toggle} ${(router.asPath != "/") || verticalNav ? styles.dark : undefined}`} onClick={() => setVerticalNav(!verticalNav)}><GiHamburgerMenu /></span>
             </nav>
-        </header>
+        </header >
     )
 }
 

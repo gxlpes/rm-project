@@ -1,0 +1,7 @@
+.item {
+  cursor: pointer;
+}
+
+.active {
+  font-weight: bolder;
+}

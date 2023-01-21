@@ -1,13 +1,3 @@
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
-    Helvetica Neue, sans-serif;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  height: 100vh;
-}
-
 :root {
   --main-grey: #6b6b6b;
   --font-dark: #3f3f3f;
@@ -20,6 +10,19 @@ body {
   --font-size-xl: clamp(1.95rem, 1.56vw + 1.56rem, 2.81rem);
   --font-size-xxl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
   --font-size-xxxl: clamp(3.05rem, 3.54vw + 2.17rem, 5rem);
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 a {
@@ -37,12 +40,19 @@ p {
 }
 
 h1 {
-  font-size: var(--font-size-lg);
-  line-height: 5.5rem;
+  font-size: var(--font-size-xxxl);
+}
+
+h2 {
+  font-size: var(--font-size-xxl);
 }
 
 h3 {
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-xl);
+}
+
+h4 {
+  font-size: var(--font-size-lg);
 }
 
 p {
@@ -70,23 +80,27 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-h3 {
-  margin: 1rem 0;
-  line-height: 1.5;
-  font-size: 1.5rem;
-  font-weight: unset;
-  text-align: left;
-}
-
-*:not(header, nav) {
-  box-sizing: border-box;
-  transition: all 0.3s ease-in-out;
+  flex: 1 1 auto;
 }
 
 .invisible {
   display: none;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  border-radius: 2px;
+  background-color: transparent;
+  color: inherit;
+  border: 1px solid var(--font-light);
+  font-family: inherit;
+  font-weight: bold;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  opacity: 0.5;
+  cursor: pointer;
 }
 
 @media (prefers-color-scheme: dark) {
