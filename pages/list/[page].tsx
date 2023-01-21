@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useRef, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import Paginate from '../../src/components/paginate/Paginate';
+import { PaginateContextProvider } from '../../src/contexts/PaginateContext';
 import { Character } from '../../src/types/api/CharacterInterface';
 import styles from "../../styles/pages/List.module.css";
 
@@ -78,47 +79,46 @@ const ListCharacter: NextPage = ({ data }: any) => {
 
     return (
         <>
-            <main>
-                <form className={styles.form} action="submit" onSubmit={handleOnSubmit}>
-                    <input ref={inputRef} name="query" type="search" />
-                    <button>Search</button>
-                </form>
-                {clientFetch ?
-                    <ul className={styles.grid}>
-                        {clientFetch.map((character: Character) => {
-                            return (
-                                <li key={character.id} className={styles.card}>
-                                    <Link href={`/character/${character.id}`}>
-                                        <Image src={character.image} alt={`${character.name}-image`} width={250} height={350} />
-                                        <div>
-                                            <h4>{character.name}</h4>
-                                            <p>Species - {character.species}</p>
-                                        </div>
-                                    </Link>
-                                </li>
-                            );
-                        })}
-                    </ul>
-                    : <ul className={styles.grid}>
-                        {results.map((character: Character) => {
-                            return (
-                                <li key={character.id} className={styles.card}>
-                                    <Link href={`/character/${character.id}`}>
-                                        <Image src={character.image} alt={`${character.name}-image`} width={250} height={350} />
-                                        <div>
-                                            <h4>{character.name}</h4>
-                                            <p>Species - {character.species}</p>
-                                        </div>
-                                    </Link>
-                                </li>
-                            );
-                        })}
-                    </ul>}
-
-
-            </main>
-
-            <Paginate currentPage={Number(router.query.page)} />
+            <PaginateContextProvider currentPage={Number(router.query.page)}>
+                <main>
+                    <form className={styles.form} action="submit" onSubmit={handleOnSubmit}>
+                        <input ref={inputRef} name="query" type="search" />
+                        <button>Search</button>
+                    </form>
+                    {clientFetch ?
+                        <ul className={styles.grid}>
+                            {clientFetch.map((character: Character) => {
+                                return (
+                                    <li key={character.id} className={styles.card}>
+                                        <Link href={`/character/${character.id}`}>
+                                            <Image src={character.image} alt={`${character.name}-image`} width={250} height={350} />
+                                            <div>
+                                                <h4>{character.name}</h4>
+                                                <p>Species - {character.species}</p>
+                                            </div>
+                                        </Link>
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                        : <ul className={styles.grid}>
+                            {results.map((character: Character) => {
+                                return (
+                                    <li key={character.id} className={styles.card}>
+                                        <Link href={`/character/${character.id}`}>
+                                            <Image src={character.image} alt={`${character.name}-image`} width={250} height={350} />
+                                            <div>
+                                                <h4>{character.name}</h4>
+                                                <p>Species - {character.species}</p>
+                                            </div>
+                                        </Link>
+                                    </li>
+                                );
+                            })}
+                        </ul>}
+                </main>
+                <Paginate />
+            </PaginateContextProvider >
         </>
 
     )

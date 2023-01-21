@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi"
-import styles from "../../../styles/layout/Header.module.css"
+import styles from "../../../styles/components/layout/Header.module.css"
 
 const Header = () => {
     const router = useRouter();
