@@ -2,7 +2,7 @@ import type { GetStaticPropsContext, NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useRef, useState, useContext, useEffect } from 'react';
+import { useRef, useState, useContext, useEffect, FormEvent, SyntheticEvent } from 'react';
 import Paginate from '../../src/components/paginate/Paginate';
 import { PaginateContextProvider } from '../../src/contexts/PaginateContext';
 import { SearchContext } from '../../src/contexts/SearchContext';
@@ -50,78 +50,38 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 }
 
 const ListCharacter: NextPage = ({ data }: any) => {
-    const { results } = data;
+    const { results, info } = data;
     const router = useRouter();
-    const inputRef = useRef<HTMLInputElement>(null);
-    const [clientFetch, setClientFetch] = useState<any>();
-    const [userInput, setUserInput] = useState<any>();
-    console.log();
 
-
-    const [isLoading, setLoading] = useState(false)
-
-
-    if (router.isFallback) {
-        return <div>Loading...</div>
+    const handleOnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        router.push(`/search/1?&name=${(event.currentTarget.elements[0] as HTMLInputElement).value}`)
     }
-
-    const handleOnSubmit = async (e: any) => {
-        setUserInput(e.target[0].value);
-        router.push(`/browse/1/name=${e.target0[0].value}`)
-    }
-
-    useEffect(() => {
-        {
-            setLoading(true)
-            fetch(`https://rickandmortyapi.com/api/character/?name=${router.asPath.substring(router.asPath.indexOf("=") + 1)}`)
-                .then((res) => res.json())
-                .then((data) => {
-                    setClientFetch(data)
-                    setLoading(false)
-                })
-        }
-    }, [])
 
     return (
         <>
-            <PaginateContextProvider currentPage={Number(router.query.page)}>
+            <PaginateContextProvider currentPage={Number(router.query.page)} overallPageLimit={info.pages}>
                 <main>
                     <form className={styles.form} action="submit" onSubmit={handleOnSubmit}>
-                        <input ref={inputRef} name="query" type="search" />
+                        <input name="query" type="search" />
                         <button>Search</button>
                     </form>
 
-                    {clientFetch && !isLoading ?
-                        <ul className={styles.grid}>
-                            {clientFetch.results.map((character: Character) => {
-                                return (
-                                    <li key={character.id} className={styles.card}>
-                                        <Link href={`/character/${character.id}`}>
-                                            <Image src={character.image} alt={`${character.name}-image`} width={250} height={350} />
-                                            <div>
-                                                <h4>{character.name}</h4>
-                                                <p>Species - {character.species}</p>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                        : <ul className={styles.grid}>
-                            {results.map((character: Character) => {
-                                return (
-                                    <li key={character.id} className={styles.card}>
-                                        <Link href={`/character/${character.id}`}>
-                                            <Image src={character.image} alt={`${character.name}-image`} width={250} height={350} />
-                                            <div>
-                                                <h4>{character.name}</h4>
-                                                <p>Species - {character.species}</p>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                );
-                            })}
-                        </ul>}
+                    <ul className={styles.grid}>
+                        {results.map((character: Character) => {
+                            return (
+                                <li key={character.id} className={styles.card}>
+                                    <Link href={`/character/${character.id}`}>
+                                        <Image src={character.image} alt={`${character.name}-image`} width={250} height={350} />
+                                        <div>
+                                            <h4>{character.name}</h4>
+                                            <p>Species - {character.species}</p>
+                                        </div>
+                                    </Link>
+                                </li>
+                            );
+                        })}
+                    </ul>
                 </main>
                 <Paginate />
             </PaginateContextProvider >

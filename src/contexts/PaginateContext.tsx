@@ -5,15 +5,16 @@ import { IChildren } from "../types/default/Children";
 
 export const PaginateContext = createContext<IPaginateContext>({} as IPaginateContext)
 
-export const PaginateContextProvider = ({ children, currentPage }: IChildren | any) => {
+export const PaginateContextProvider = ({ children, currentPage, overallPageLimit }: IChildren | any) => {
     const router = useRouter();
+    console.log(router);
     const [minPageLimit, setMinPageLimit] = useState<number>(0)
     const [maxPageLimit, setMaxPageLimit] = useState<number>(5)
     const pageNumberLimit = 5;
 
 
     const pages = [];
-    for (let i = 1; i <= 42; i++) {
+    for (let i = 1; i <= overallPageLimit; i++) {
         pages.push(i);
     }
 
@@ -25,7 +26,11 @@ export const PaginateContextProvider = ({ children, currentPage }: IChildren | a
     }, []);
 
     const handlePageClick = (page: number) => {
-        router.push(`/list/${page}`)
+        if (router.asPath.includes("search")) {
+            router.push(`/search/${page}?name=${router.query.name}`)
+        } else {
+            router.push(`/list/${page}`)
+        }
     }
 
     const increaseSectionPaginate = () => {
@@ -40,7 +45,11 @@ export const PaginateContextProvider = ({ children, currentPage }: IChildren | a
 
     const nextPage = () => {
         if (currentPage >= maxPageLimit) increaseSectionPaginate();
-        router.push(`/list/${currentPage + 1}`)
+        if (router.asPath.includes("search")) {
+            router.push(`/search/${currentPage + 1}?name=${router.query.name}`)
+        } else {
+            router.push(`/list/${currentPage + 1}`)
+        }
     }
 
     const prevPage = () => {
@@ -48,7 +57,12 @@ export const PaginateContextProvider = ({ children, currentPage }: IChildren | a
             setMaxPageLimit(maxPageLimit - pageNumberLimit);
             setMinPageLimit(minPageLimit - pageNumberLimit);
         }
-        router.push(`/list/${currentPage - 1}`)
+
+        if (router.asPath.includes("search")) {
+            router.push(`/search/${currentPage - 1}?name=${router.query.name}`)
+        } else {
+            router.push(`/list/${currentPage - 1}`)
+        }
     }
 
     return (
