@@ -12,7 +12,6 @@ export const PaginateContextProvider = ({ children, currentPage, overallPageLimi
     const [maxPageLimit, setMaxPageLimit] = useState<number>(5)
     const pageNumberLimit = 5;
 
-
     const pages = [];
     for (let i = 1; i <= overallPageLimit; i++) {
         pages.push(i);
@@ -29,7 +28,7 @@ export const PaginateContextProvider = ({ children, currentPage, overallPageLimi
         if (router.asPath.includes("search")) {
             router.push(`/search/${page}?name=${router.query.name}`)
         } else {
-            router.push(`/list/${page}`)
+            router.push(`/browse/${page}`)
         }
     }
 
@@ -48,7 +47,7 @@ export const PaginateContextProvider = ({ children, currentPage, overallPageLimi
         if (router.asPath.includes("search")) {
             router.push(`/search/${currentPage + 1}?name=${router.query.name}`)
         } else {
-            router.push(`/list/${currentPage + 1}`)
+            router.push(`/browse/${currentPage + 1}`)
         }
     }
 
@@ -61,7 +60,7 @@ export const PaginateContextProvider = ({ children, currentPage, overallPageLimi
         if (router.asPath.includes("search")) {
             router.push(`/search/${currentPage - 1}?name=${router.query.name}`)
         } else {
-            router.push(`/list/${currentPage - 1}`)
+            router.push(`/browse/${currentPage - 1}`)
         }
     }
 

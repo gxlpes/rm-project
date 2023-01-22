@@ -1,13 +1,10 @@
 import type { GetStaticPropsContext, NextPage } from 'next';
-import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useRef, useState, useContext, useEffect, FormEvent, SyntheticEvent } from 'react';
+import CharacterCard from '../../src/components/character/CharacterCard';
 import Paginate from '../../src/components/paginate/Paginate';
 import { PaginateContextProvider } from '../../src/contexts/PaginateContext';
-import { SearchContext } from '../../src/contexts/SearchContext';
 import { Character } from '../../src/types/api/CharacterInterface';
-import styles from "../../styles/pages/List.module.css"
+import styles from "../../styles/pages/List.module.css";
 
 const defaultEndpoint = 'https://rickandmortyapi.com/api/character';
 
@@ -69,17 +66,7 @@ const ListCharacter: NextPage = ({ data }: any) => {
 
                     <ul className={styles.grid}>
                         {results.map((character: Character) => {
-                            return (
-                                <li key={character.id} className={styles.card}>
-                                    <Link href={`/character/${character.id}`}>
-                                        <Image src={character.image} alt={`${character.name}-image`} width={250} height={350} />
-                                        <div>
-                                            <h4>{character.name}</h4>
-                                            <p>Species - {character.species}</p>
-                                        </div>
-                                    </Link>
-                                </li>
-                            );
+                            return (<CharacterCard key={character.id} character={character} />)
                         })}
                     </ul>
                 </main>
