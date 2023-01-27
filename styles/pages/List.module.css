@@ -1,7 +1,7 @@
 .grid {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   gap: 1rem;
   flex-wrap: wrap;
   margin-inline: 5rem;
@@ -21,15 +21,10 @@
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  width: 25rem;
+  width: 35.6rem;
   height: 150px;
   overflow: hidden;
   display: flex;
-  gap: 1rem;
-}
-
-.container {
-  margin-block: auto;
 }
 
 .card p {
@@ -44,17 +39,47 @@
   text-overflow: ellipsis;
 }
 
-.card:hover,
+/* .card:hover,
 .card:focus,
 .card:active {
   color: var(--main-grey);
   border-color: var(--main-grey);
   cursor: pointer;
-}
+} */
 
 .card img {
-  height: auto;
+  height: 100%;
   width: auto;
+}
+
+.card img:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.icons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.container {
+  width: 100%;
+  padding-inline: 2rem;
+
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.container span {
+  cursor: pointer;
+}
+
+.container span :hover {
+  opacity: 0.5;
 }
 
 @media (max-width: 600px) {
@@ -64,9 +89,5 @@
 
   .card {
     width: 85%;
-  }
-
-  .card img {
-    height: 75%;
   }
 }
