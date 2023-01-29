@@ -1,5 +1,7 @@
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { Provider } from 'react-redux';
+import { store } from '../features/store/store';
 import Footer from '../src/components/layout/Footer';
 import Header from '../src/components/layout/Header';
 import { SearchContextProvider } from '../src/contexts/SearchContext';
@@ -16,9 +18,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
       </>
       <Header />
-      <SearchContextProvider>
-        <Component {...pageProps} />
-      </SearchContextProvider>
+      <Provider store={store}>
+        <SearchContextProvider>
+          <Component {...pageProps} />
+        </SearchContextProvider>
+      </Provider>
       <Footer />
     </>
   )
