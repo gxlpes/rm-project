@@ -14,6 +14,16 @@ async function createUser(email: any, password: any) {
     })
 }
 
+interface TestingData {
+    data: {
+        user: {
+            email: string,
+            password: string,
+        }
+        token: string
+    }
+}
+
 const Auth: NextPage = () => {
     const [isLogin, setIsLogin] = useState(true);
     const emailRef = useRef<HTMLInputElement>(null);
@@ -28,13 +38,19 @@ const Auth: NextPage = () => {
         const enteredPassword = passwordRef.current!.value;
 
         if (isLogin) {
-            const result = await loginUser({ email: enteredEmail, password: enteredPassword })
-            console.log(result);
+            try {
+                const user = await loginUser({ email: enteredEmail, password: enteredPassword }).unwrap()
+                dispatch(setCredentials(user))
+            } catch (error) {
+                console.error(error)
+            }
+
+
         } else {
             try {
                 // const result = await createUser(enteredEmail, enteredPassword);
                 const user = await addNewUser({ email: enteredEmail, password: enteredPassword }).unwrap()
-                console.log(user);
+                dispatch(setCredentials(user))
             } catch (error) {
                 console.log(error);
             }

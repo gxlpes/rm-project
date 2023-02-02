@@ -2,11 +2,15 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi"
+import { useSelector } from 'react-redux'
 import styles from "../../../styles/components/layout/Header.module.css"
+import { selectCurrentUser } from '../../app/features/authSlice'
+import { RootState } from '../../app/store/store'
 
 const Header = () => {
     const router = useRouter();
     const [verticalNav, setVerticalNav] = useState(false);
+    const { isAuthenticated } = useSelector((state: RootState) => state.auth)
 
     return (
         <header className={`${styles.header} ${(router.asPath == "/") ? styles.home : styles.blur}`}>
@@ -43,7 +47,7 @@ const Header = () => {
                 <div className={verticalNav ? styles.mobile : styles.desktop}>
                     <Link href="/browse/1" onClick={verticalNav ? () => setVerticalNav(false) : undefined}>Browse</Link>
                     <Link href="/about">About</Link>
-                    <button onClick={() => router.push("/auth")}>Login</button>
+                    {isAuthenticated ? <p>Welcome</p> : <button onClick={() => router.push("/auth")}>Login</button>}
                 </div>
                 <span className={`${styles.toggle} ${(router.asPath != "/") || verticalNav ? styles.dark : undefined}`} onClick={() => setVerticalNav(!verticalNav)}><GiHamburgerMenu /></span>
             </nav>

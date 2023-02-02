@@ -1,7 +1,9 @@
 import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { Provider } from 'react-redux';
 import { api } from '../src/app/services/auth';
+import { store } from '../src/app/store/store';
 import Footer from '../src/components/layout/Footer';
 import Header from '../src/components/layout/Header';
 import { SearchContextProvider } from '../src/contexts/SearchContext';
@@ -17,11 +19,14 @@ function MyApp({ Component, pageProps }: AppProps) {
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         </Head>
       </>
-      <Header />
       <ApiProvider api={api}>
-        <SearchContextProvider>
-          <Component {...pageProps} />
-        </SearchContextProvider>
+        <Provider store={store}>
+
+          <Header />
+          <SearchContextProvider>
+            <Component {...pageProps} />
+          </SearchContextProvider>
+        </Provider>
       </ApiProvider>
       <Footer />
     </>

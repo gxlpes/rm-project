@@ -6,15 +6,17 @@ import type { RootState } from "../store/store";
 type AuthState = {
   user: User | null;
   token: string | null;
+  isAuthenticated: boolean;
 };
 
 const slice = createSlice({
   name: "auth",
-  initialState: { user: null, token: null } as AuthState,
+  initialState: { user: null, token: null, isAuthenticated: false } as AuthState,
   reducers: {
     setCredentials: (state, { payload: { user, token } }: PayloadAction<{ user: User; token: string }>) => {
       state.user = user;
       state.token = token;
+      state.isAuthenticated = true;
     },
   },
 });

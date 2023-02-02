@@ -1,10 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store/store";
-import jwt from "jsonwebtoken";
 
 export interface User {
-  first_name: string;
-  last_name: string;
+  email: string;
+  password: string;
 }
 
 export interface UserResponse {
@@ -30,7 +29,7 @@ export const api = createApi({
     // },
   }),
   endpoints: (builder) => ({
-    login: builder.mutation<UserResponse, LoginRequest>({
+    login: builder.mutation({
       query: (credentials) => ({
         url: "login",
         method: "POST",

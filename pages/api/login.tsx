@@ -1,12 +1,13 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { verifyPassword } from "../../src/lib/auh";
 import { connectToDatabase } from "../../src/lib/db";
+import jwt from "jsonwebtoken"
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === "POST") {
         const data = req.body;
         const { email, password } = data;
-        console.log("email", email)
+        console.log("email", data)
 
         const client = await connectToDatabase();
         const db = client.db();
@@ -18,7 +19,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             console.log(isValid)
         }
 
-        let token = "1"
+        let token = jwt.sign(data, "secretJWT", { expiresIn: '1h' })
 
         return res.json({
             user: {
