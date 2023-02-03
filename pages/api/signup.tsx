@@ -12,7 +12,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
             return;
         }
 
-        const client = await connectToDatabase();
+        const client = await connectToDatabase("users");
         const db = client.db();
         const existingUser = await db.collection("data").findOne({ email: email });
 

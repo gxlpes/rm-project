@@ -4,8 +4,8 @@
   --font-light: #ffffff;
 
   --font-size-sm: clamp(0.8rem, 0.17vw + 0.76rem, 0.89rem);
-  --font-size-base: clamp(1rem, 0.3vw + 0.5rem, 1rem);
-  --font-size-lg: clamp(0.5rem, 0.5vw + 0.8rem, 1.8rem);
+  --font-size-base: clamp(1.2rem, 0.5vw + 0.5rem, 1rem);
+  --font-size-lg: clamp(1.5rem, 0.5vw + 0.8rem, 1.8rem);
   --font-size-xl: clamp(1.95rem, 1.56vw + 1.56rem, 2.81rem);
   --font-size-xxl: clamp(2.44rem, 2.38vw + 1.85rem, 3.75rem);
   --font-size-xxxl: clamp(3.05rem, 3.54vw + 2.17rem, 5rem);

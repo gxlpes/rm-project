@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React from 'react'
 import { AiFillGithub } from 'react-icons/ai'
-import styles from "../../../styles/components/layout/Footer.module.css"
+import styles from "../../../../styles/components/layout/Footer.module.css"
 
 const Footer = () => {
     const { asPath } = useRouter();

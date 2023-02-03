@@ -3,9 +3,8 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi"
 import { useSelector } from 'react-redux'
-import styles from "../../../styles/components/layout/Header.module.css"
-import { selectCurrentUser } from '../../app/features/authSlice'
-import { RootState } from '../../app/store/store'
+import styles from "../../../../styles/components/layout/Header.module.css"
+import { RootState } from '../../../app/store/store'
 
 const Header = () => {
     const router = useRouter();
@@ -47,7 +46,7 @@ const Header = () => {
                 <div className={verticalNav ? styles.mobile : styles.desktop}>
                     <Link href="/browse/1" onClick={verticalNav ? () => setVerticalNav(false) : undefined}>Browse</Link>
                     <Link href="/about">About</Link>
-                    {isAuthenticated ? <p>Welcome</p> : <button onClick={() => router.push("/auth")}>Login</button>}
+                    {isAuthenticated ? <Link href="/storage">Storage</Link> : <button onClick={() => router.push("/auth")}>Login</button>}
                 </div>
                 <span className={`${styles.toggle} ${(router.asPath != "/") || verticalNav ? styles.dark : undefined}`} onClick={() => setVerticalNav(!verticalNav)}><GiHamburgerMenu /></span>
             </nav>

@@ -1,23 +1,24 @@
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import styles from "../../../styles/pages/List.module.css"
-import { CharacterCard } from '../../types/pages/CharacterCardInterface'
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs"
 import { BiLinkExternal } from "react-icons/bi"
-import { useState } from 'react'
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs"
+import { useDispatch } from 'react-redux'
+import styles from "../../../styles/components/characters/Characters.module.css"
+import { addCharacter, deleteCharacter } from '../../app/features/storeSlice'
+import { CharacterCard } from '../../types/pages/CharacterCardInterface'
 
-const CharacterCard = ({ character }: CharacterCard) => {
+const CharacterCard = ({ character, charactersArray }: CharacterCard) => {
     const router = useRouter();
-    const [idsToSave, setIdsToSave] = useState<any>([]);
-    console.log(idsToSave);
+    const dispatch = useDispatch();
+    console.log(charactersArray)
 
     return (
         <li key={character.id} className={styles.card}>
-            <Image onClick={() => router.push(`/character/${character.id}`)} src={character.image} alt={`${character.name}-image`} width={250} height={350} />
+            <Image onClick={() => router.push(`/character/${character.id}`)} src={character.image} alt={`${character.name}-image`} width={450} height={800} />
             <div className={styles.container}>
                 <div className={styles.icons}>
-                    <span onClick={idsToSave?.includes(character.id) ? () => setIdsToSave((prev: any) => prev.filter((id: any) => { return id !== character.id })) : () => setIdsToSave((prev: any) => [...prev, character.id])}>
-                        {idsToSave?.includes(character.id) ? <BsBookmarkFill size={20} /> : <BsBookmark size={20} />}
+                    <span onClick={charactersArray.includes(character.id) ? () => dispatch(deleteCharacter(character.id)) : () => dispatch(addCharacter(character.id))}>
+                        {charactersArray.includes(character.id) ? <BsBookmarkFill size={20} /> : <BsBookmark size={20} />}
                     </span>
                     <span>
                         <BiLinkExternal size={20} onClick={() => router.push(`/character/${character.id}`)} />
@@ -30,7 +31,7 @@ const CharacterCard = ({ character }: CharacterCard) => {
                     <p>Last seen in E{String(character.episode).split("/").pop()}</p>
                 </div>
             </div>
-        </li>
+        </li >
     )
 }
 

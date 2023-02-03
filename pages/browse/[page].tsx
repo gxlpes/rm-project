@@ -1,5 +1,6 @@
 import type { GetStaticPropsContext, NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 import CharacterCard from '../../src/components/character/CharacterCard';
 import Paginate from '../../src/components/paginate/Paginate';
 import { PaginateContextProvider } from '../../src/contexts/PaginateContext';
@@ -49,6 +50,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 const ListCharacter: NextPage = ({ data }: any) => {
     const { results, info } = data;
     const router = useRouter();
+    const charactersArray = useSelector((state: any) => state.store.characters);
+    console.log(charactersArray, "array")
 
     const handleOnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -66,7 +69,7 @@ const ListCharacter: NextPage = ({ data }: any) => {
 
                     <ul className={styles.grid}>
                         {results.map((character: Character) => {
-                            return (<CharacterCard key={character.id} character={character} />)
+                            return (<CharacterCard key={character.id} character={character} charactersArray={charactersArray} />)
                         })}
                     </ul>
                 </main>

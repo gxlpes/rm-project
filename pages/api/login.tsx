@@ -9,7 +9,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
         const { email, password } = data;
         console.log("email", data)
 
-        const client = await connectToDatabase();
+        const client = await connectToDatabase("users");
         const db = client.db();
         const existingUser = await db.collection("data").findOne({ email: email });
         console.log(existingUser!.password)

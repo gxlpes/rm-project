@@ -2,27 +2,8 @@ import { NextPage } from 'next';
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../src/app/features/authSlice';
+import { showNotification } from '../src/app/features/notificationSlice';
 import { useLoginMutation, useSignupMutation } from '../src/app/services/auth';
-
-async function createUser(email: any, password: any) {
-    const response = await fetch("/api/signup", {
-        method: "POST",
-        body: JSON.stringify({ email, password }),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    })
-}
-
-interface TestingData {
-    data: {
-        user: {
-            email: string,
-            password: string,
-        }
-        token: string
-    }
-}
 
 const Auth: NextPage = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -56,6 +37,9 @@ const Auth: NextPage = () => {
             }
         }
     }
+
+    dispatch(showNotification({ title: "Success!", message: "You are logged!", status: "success" }))
+
 
     return (
         <form onSubmit={submitHandler}>
