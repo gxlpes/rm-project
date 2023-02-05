@@ -10,7 +10,8 @@ const Auth: NextPage = () => {
     const emailRef = useRef<HTMLInputElement>(null);
     const passwordRef = useRef<HTMLInputElement>(null);
     const [addNewUser, response1] = useSignupMutation()
-    const [loginUser, response2] = useLoginMutation();
+    const [loginUser, loginUserStatus] = useLoginMutation();
+
     const dispatch = useDispatch();
 
     async function submitHandler(event: any) {
@@ -18,18 +19,27 @@ const Auth: NextPage = () => {
         const enteredEmail = emailRef.current!.value;
         const enteredPassword = passwordRef.current!.value;
 
+
+
         if (isLogin) {
+            dispatch(showNotification({ title: "Verifying...", message: "Checking your account", status: "pending" }))
+
             try {
                 const user = await loginUser({ email: enteredEmail, password: enteredPassword }).unwrap()
+                console.log(user)
+
                 dispatch(setCredentials(user))
+                dispatch(showNotification({ title: "Success!", message: "You are logged!", status: "success" }))
             } catch (error) {
+                dispatch(showNotification({ title: "Error!", message: "Something went wrong!", status: "error" }))
                 console.error(error)
             }
 
 
+
+
         } else {
             try {
-                // const result = await createUser(enteredEmail, enteredPassword);
                 const user = await addNewUser({ email: enteredEmail, password: enteredPassword }).unwrap()
                 dispatch(setCredentials(user))
             } catch (error) {
@@ -38,7 +48,6 @@ const Auth: NextPage = () => {
         }
     }
 
-    dispatch(showNotification({ title: "Success!", message: "You are logged!", status: "success" }))
 
 
     return (

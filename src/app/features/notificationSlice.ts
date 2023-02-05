@@ -1,16 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const emptyNotificationToast = { title: "", message: "", status: "" };
+
 const slice = createSlice({
   name: "notification",
-  initialState: { activeNotification: null, isRendered: false },
+  initialState: {
+    activeNotification: emptyNotificationToast,
+    isRendered: false,
+  },
   reducers: {
     showNotification: (state, { payload }) => {
       state.activeNotification = payload;
       state.isRendered = true;
-      console.log(payload);
     },
     hideNotification: (state) => {
-      state.activeNotification = null;
+      state.activeNotification = emptyNotificationToast;
+      state.isRendered = false;
     },
   },
 });

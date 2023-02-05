@@ -11,8 +11,6 @@ interface Notification {
 
 const NotificationToast = ({ title, message, status }: Notification) => {
     const dispatch = useDispatch();
-    const isRendered = useSelector((state: any) => state.notification.isRendered)
-    console.log(isRendered, "render");
 
     let statusClasses = "";
 
