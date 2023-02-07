@@ -2,7 +2,7 @@ import { GetServerSidePropsContext, NextPage } from "next";
 import CharacterCard from "../../src/components/character/CharacterCard";
 import Paginate from "../../src/components/paginate/Paginate";
 import { PaginateContextProvider } from "../../src/contexts/PaginateContext";
-import { Character } from "../../src/types/api/CharacterInterface";
+import { Character } from "../../src/types/api/data/Character";
 import styles from "../../styles/pages/List.module.css";
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {

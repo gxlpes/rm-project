@@ -11,9 +11,9 @@ const Layout = ({ children }: any) => {
     const isRendered = useSelector((state: any) => state.notification.isRendered)
     const dispatch = useDispatch()
 
-    if (isRendered && notificationToastData.title === "Success") setTimeout(() => {
+    if (isRendered) setTimeout(() => {
         dispatch(hideNotification())
-    }, 5000)
+    }, 3000)
 
     return (
         <>
