@@ -1,12 +1,12 @@
 # Rick and Morty Project
 
-Project created to practice Next.js and its core features such as SSG, SSR, pages and API routes. The website uses the Rick and Morty API to provide dummy data to work with in both front-end and back-end. This project also uses TypeScript/JavaScript as its core language.
+Project created to practice Next.js and its core features such as Static Site Generation (SSG), Server-side Rendering (SSR), pages, and API routes. The website uses the Rick and Morty API to provide dummy data for front-end and back-end practice. TypeScript/JavaScript is used as the core language.
 
-The back-end of this application was made using features of Next.js such as handlers (req and res fully typed/provided) and api routes. The API communicates with the front-end using RTK Query provided by Redux-Toolkit.
+The back-end was built using Next.js handlers (with fully typed req and res) and API routes. The front-end communicates with the back-end through RTK Query provided by Redux-Toolkit.
 
-All side-data as user authentication (w/ JWT) and some other data are stored using a NoSQL database MongoDB. I prefered not to use moongose in this project.
+User authentication (using JWT) and other data are stored in a NoSQL database, MongoDB, without using Mongoose.
 
-In the front-end part of the application, CSS Modules was used as a more simplist and fast way of doing styling. React core fundaments were used and properly applied. The state managament of this application is conducted by React Toolkit and their features such as slices and dispatch functions.
+The front-end uses CSS Modules for simple and fast styling. The core fundamentals of React were applied, and the state management is handled by React Toolkit and its features such as slices and dispatch functions.
 
 Tech used:
 
