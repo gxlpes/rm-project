@@ -19,6 +19,7 @@ const AuthPage: NextPage = () => {
             const user = isLogin ? await loginUser(userCredentials).unwrap() : await signUser(userCredentials).unwrap()
             dispatch(showNotification({ title: "Success!", message: "You are logged!", status: "success" }))
             dispatch(setCredentials(user))
+
         } catch (error) {
             console.error(error)
             dispatch(showNotification({ title: "Error!", message: "Something went wrong!", status: "error" }))

@@ -25,7 +25,6 @@ export async function getStaticPaths() {
 
 export async function getStaticProps(context: GetStaticPropsContext) {
     const { params } = context;
-    console.log(params);
     const res = await fetch(defaultEndpoint + `/?page=${params!.page}`);
     const data = await res.json();
 

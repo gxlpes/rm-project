@@ -4,29 +4,37 @@ import { connectToDatabase } from "../../src/lib/db";
 import { UserCredentials } from "../../src/types/api/backend/User";
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "POST") return res.status(405).json({ message: "Only POST requests are allowed" });
+  const client = await connectToDatabase("users");
+  const db = client.db();
+  const charactersCollection = db.collection("characters");
+  const { characterId, email } = req.body;
+  const { token } = req.query;
 
-  try {
-    const client = await connectToDatabase("users");
-    const db = client.db();
-    const { characterId, email } = req.body;
+  console.log(token);
 
-    const userAlreadySavedCharacters = await db.collection("characters").findOne({ email: email });
+  switch (req.method) {
+    case "POST": {
+      try {
+        charactersCollection.findOneAndUpdate(
+          { email },
+          { $addToSet: { characters: characterId } },
+          {
+            upsert: true,
+            returnDocument: "after",
+          }
+        );
 
-    console.log(userAlreadySavedCharacters);
-
-    if (!userAlreadySavedCharacters) {
-      db.collection("characters").insertOne({ characterId, email });
-      console.log("heuehue");
-    } else {
-      db.collection("characters").updateOne({ email: email }, { $push: { characterId: [characterId] } });
+        client.close();
+        return res.status(201).json({ message: "Inserted characters" });
+      } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Server error" });
+      }
     }
-
-    return res.status(201).json({ message: "Inserted characters" });
-    client.close();
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Server error" });
+    case "GET": {
+      const test = charactersCollection.findOne({ email: email });
+      return res.status(200).json({ test });
+    }
   }
 }
 

@@ -13,16 +13,10 @@ export const api = createApi({
         body: data,
       }),
     }),
-    getCharacters: builder.mutation({
-      query(credentials) {
-        return {
-          url: "characters",
-          method: "GET",
-          body: credentials,
-        };
-      },
+    getCharacters: builder.query({
+      query: (token) => ({ url: `storage/${token}` }),
     }),
   }),
 });
 
-export const { useSaveCharactersMutation, useGetCharactersMutation } = api;
+export const { useSaveCharactersMutation, useGetCharactersQuery } = api;
