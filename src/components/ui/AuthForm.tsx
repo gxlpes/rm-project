@@ -21,7 +21,7 @@ const AuthForm = ({ submitHandler }: any) => {
                 <input type="password" id="password" required ref={passwordRef} />
             </div>
             <button type="button" >{isLogin ? "Login" : "Create account"}</button>
-            <button type="button" onClick={() => setIsLogin((prev: boolean) => !prev)}>
+            <button type="button" onClick={() => setIsLogin((prevState: boolean) => !prevState)}>
                 {isLogin ? "Create new account" : "Login with existing account"}
             </button>
             <button type="submit">Submit</button>

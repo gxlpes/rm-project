@@ -14,7 +14,6 @@ export async function getStaticPaths() {
     const res = await fetch(defaultEndpoint);
     const data = await res.json();
 
-
     const pages = Array.from({ length: data.info.pages }, (_, i) => i + 1);
 
     const pathsWithParams = pages.map((page: any) => ({ params: { page: page.toString() } }));
@@ -69,7 +68,7 @@ const ListCharacter: NextPage = ({ data }: any) => {
 
                     <ul className={styles.grid}>
                         {results.map((character: Character) => {
-                            return (<CharacterCard key={character.id} character={character} charactersArray={charactersArray} />)
+                            return (<CharacterCard key={character.id} character={character} saved={charactersArray.includes(character.id)} />)
                         })}
                     </ul>
                 </main>

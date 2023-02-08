@@ -1,29 +1,23 @@
 import { useDispatch } from "react-redux";
+import styles from "../../../styles/components/ui/Notification.module.css";
 import { hideNotification } from "../../app/features/notificationSlice";
-import styles from "../../../styles/components/ui/Notification.module.css"
-import { useSelector } from "react-redux";
-
-interface Notification {
-    title: string
-    message: string
-    status: string
-}
+import { Notification } from "../../types/api/ui/Notification";
 
 const NotificationToast = ({ title, message, status }: Notification) => {
     const dispatch = useDispatch();
-
     let statusClasses = "";
 
-    if (status === "success") {
-        statusClasses = styles.success;
-    }
-
-    if (status === "error") {
-        statusClasses = styles.error;
-    }
-
-    if (status === "pending") {
-        statusClasses = styles.pending;
+    switch (status) {
+        case "success":
+            statusClasses = styles.success;
+            break;
+        case "error":
+            statusClasses = styles.error;
+            break;
+        case "pending":
+            statusClasses = styles.pending;
+            break;
+        default: statusClasses = ""
     }
 
     const activeClasses = `${styles.notification} ${statusClasses}`;

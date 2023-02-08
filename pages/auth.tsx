@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../src/app/features/authSlice';
 import { showNotification } from '../src/app/features/notificationSlice';
