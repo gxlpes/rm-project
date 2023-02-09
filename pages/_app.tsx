@@ -1,4 +1,5 @@
 import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
+import { GetServerSidePropsContext } from 'next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
@@ -7,8 +8,22 @@ import { store } from '../src/app/store/store';
 import Layout from '../src/components/layout/Layout';
 import { SearchContextProvider } from '../src/contexts/SearchContext';
 import '../styles/global/globals.css';
+import * as cookie from 'cookie'
 
-function MyApp({ Component, pageProps }: AppProps) {
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const parsedCookies = context.req.headers.cookie
+  console.log(parsedCookies, "aAAAAAAAAAAAAAAAAAAAAAA")
+
+  return {
+    props: {
+      data: parsedCookies,
+    }
+  }
+}
+
+function MyApp({ Component, pageProps }: AppProps, { data }: any) {
+  console.log(data, "cookies ehuehuehue")
   return (
     <>
       <ApiProvider api={extendedApi}>

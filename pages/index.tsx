@@ -1,9 +1,9 @@
 import type { NextPage } from 'next';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import styles from '../styles/pages/Home.module.css';
 
 const Home: NextPage = () => {
-  const router = useRouter();
 
   return (
     <>
@@ -14,7 +14,7 @@ const Home: NextPage = () => {
               <h1>Rick and Morty Wiki</h1>
               <h4>Data about characters and their life</h4>
             </div>
-            <button onClick={() => router.push("/browse/1")}>Browse characters</button>
+            <Link href={("/browse/1")}>Browse characters</Link>
           </div>
         </div>
       </div>

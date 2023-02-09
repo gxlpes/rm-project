@@ -1,24 +1,20 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react';
 
-const AuthForm = ({ submitHandler }: any) => {
-    const emailRef = useRef<HTMLInputElement>(null);
-    const passwordRef = useRef<HTMLInputElement>(null);
+const AuthForm = ({ submitHandler }: (any)) => {
     const [isLogin, setIsLogin] = useState(true);
-
-    const userCredentials = {
-        email: emailRef.current?.value,
-        password: passwordRef.current?.value
-    }
+    const [credentialsField, setCredentialsField] = useState({ email: "", password: "" })
 
     return (
-        <form onSubmit={(event: React.FormEvent) => submitHandler(event, userCredentials, isLogin)}>
+        <form onSubmit={(event: React.FormEvent) => submitHandler(event, credentialsField, isLogin)}>
             <div>
                 <label htmlFor="email">Your Email</label>
-                <input type="email" id="email" required ref={emailRef} />
+                <input type="email" id="email" required
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCredentialsField({ ...credentialsField, email: e.target.value })} />
             </div>
             <div>
                 <label htmlFor="password">Your Password</label>
-                <input type="password" id="password" required ref={passwordRef} />
+                <input type="password" id="password" required
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCredentialsField({ ...credentialsField, password: e.target.value })} />
             </div>
             <button type="button" >{isLogin ? "Login" : "Create account"}</button>
             <button type="button" onClick={() => setIsLogin((prevState: boolean) => !prevState)}>

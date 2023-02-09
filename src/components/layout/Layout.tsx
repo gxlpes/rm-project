@@ -20,7 +20,8 @@ const Layout = ({ children }: any) => {
             <Header />
             <div>{children}</div>
             {isRendered ? <NotificationToast title={notificationToastData.title} message={notificationToastData.message} status={notificationToastData.status} /> : null}
-            <Footer /></>
+            <Footer />
+        </>
     )
 }
 

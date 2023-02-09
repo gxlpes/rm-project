@@ -11,8 +11,10 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.1",
     "@types/bcryptjs": "^2.4.2",
+    "@types/cookies": "^0.7.7",
     "@types/react-redux": "^7.1.25",
     "bcryptjs": "^2.4.3",
+    "cookie": "^0.5.0",
     "jsonwebtoken": "^9.0.0",
     "mongodb": "^5.0.0",
     "next": "13.1.1",
@@ -24,6 +26,7 @@
     "redux": "^4.2.0"
   },
   "devDependencies": {
+    "@types/cookie": "^0.5.1",
     "@types/jsonwebtoken": "^9.0.1",
     "@types/node": "18.11.18",
     "@types/react": "18.0.26",
