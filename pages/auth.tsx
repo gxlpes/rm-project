@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../src/app/features/authSlice';
 import { showNotification } from '../src/app/features/notificationSlice';
-import { useLoginMutation, useSignupMutation } from '../src/app/services/auth';
+import { useLoginMutation, useSignupMutation } from '../src/app/services/extendedApi';
 import AuthForm from '../src/components/ui/AuthForm';
 import { UserCredentials } from '../src/types/api/backend/User';
 

@@ -1,17 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { api } from "../services/auth";
 import authReducer from "../features/authSlice";
-import charactersReducer from "../features/storeSlice";
+import charactersReducer from "../features/charactersSlice";
 import notificationReducer from "../features/notificationSlice";
+import { extendedApi } from "../../app/services/extendedApi";
 
 export const store = configureStore({
   reducer: {
-    [api.reducerPath]: api.reducer,
+    [extendedApi.reducerPath]: extendedApi.reducer,
     auth: authReducer,
-    store: charactersReducer,
+    characters: charactersReducer,
     notification: notificationReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(api.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(extendedApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

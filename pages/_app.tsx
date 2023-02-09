@@ -2,7 +2,7 @@ import { ApiProvider } from '@reduxjs/toolkit/dist/query/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { Provider } from 'react-redux';
-import { api } from '../src/app/services/auth';
+import { extendedApi } from '../src/app/services/extendedApi';
 import { store } from '../src/app/store/store';
 import Layout from '../src/components/layout/Layout';
 import { SearchContextProvider } from '../src/contexts/SearchContext';
@@ -11,7 +11,7 @@ import '../styles/global/globals.css';
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
-      <ApiProvider api={api}>
+      <ApiProvider api={extendedApi}>
         <Provider store={store}>
           <Layout>
             <>

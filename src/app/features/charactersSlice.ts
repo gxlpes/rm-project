@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const slice = createSlice({
-  name: "store",
+  name: "characters",
   initialState: { characters: [] as number[] },
   reducers: {
     addCharacter: (state, { payload }) => {
