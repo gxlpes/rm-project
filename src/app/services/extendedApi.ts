@@ -18,13 +18,13 @@ export const extendedApi = emptySplitApi.injectEndpoints({
     }),
     saveCharacter: builder.mutation({
       query: (data) => ({
-        url: "characters",
+        url: `characters/${data.token}`,
         method: "POST",
         body: data,
       }),
     }),
     getCharacters: builder.query({
-      query: (token) => ({ url: `characters/${token}` }),
+      query: (email) => ({ url: `characters/${email}` }),
     }),
   }),
   overrideExisting: false,

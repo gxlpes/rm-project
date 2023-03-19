@@ -2,12 +2,15 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { GiHamburgerMenu } from "react-icons/gi"
+import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import styles from "../../../../styles/components/layout/Header.module.css"
 import { RootState } from '../../../app/store/store'
+import { signOutUser } from "../../../app/features/authSlice"
 
 const Header = () => {
     const router = useRouter();
+    const dispatch = useDispatch();
     const [verticalNav, setVerticalNav] = useState(false);
     const { isAuthenticated, token } = useSelector((state: RootState) => state.auth)
 
@@ -47,6 +50,7 @@ const Header = () => {
                     <Link href="/browse/1" onClick={verticalNav ? () => setVerticalNav(false) : undefined}>Browse</Link>
                     <Link href="/about">About</Link>
                     {isAuthenticated ? <Link href={`/storage/${token}`}>Storage</Link> : <button onClick={() => router.push("/auth")}>Login</button>}
+                    {isAuthenticated ? <button onClick={() => dispatch(signOutUser)}>Sign Out</button> : null}
                 </div>
                 <span className={`${styles.toggle} ${(router.asPath != "/") || verticalNav ? styles.dark : undefined}`} onClick={() => setVerticalNav(!verticalNav)}><GiHamburgerMenu /></span>
             </nav>

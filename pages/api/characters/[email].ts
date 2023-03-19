@@ -8,6 +8,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   const charactersCollection = db.collection("characters");
   const { characterId, email } = req.body;
 
+  console.log("req body", req.body);
+
   switch (req.method) {
     case "POST": {
       try {
@@ -20,7 +22,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
           }
         );
 
-        client.close();
+        setTimeout(() => {
+          client.close();
+        }, 1500);
         return res.status(201).json({ message: "Inserted characters" });
       } catch (error) {
         console.error(error);
@@ -28,10 +32,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       }
     }
     case "GET": {
-      const token = req.url?.split("/").pop();
-      const { email }: any = jwt.verify(`${token}`, `${process.env.JWT_SECRET}`);
+      const email = req.url?.split("/").pop();
+      // const { email }: any = jwt.verify(`${token}`, `${process.env.JWT_SECRET}`);
+      console.log(email);
       const dataFromUser = await charactersCollection.findOne({ email: email });
-      return res.status(200).json({ dataFromUser });
+      console.log(dataFromUser?.characters);
+      return res.status(200).json({ characters: dataFromUser?.characters });
     }
   }
 }

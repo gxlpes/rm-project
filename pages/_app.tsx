@@ -13,7 +13,7 @@ import * as cookie from 'cookie'
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const parsedCookies = context.req.headers.cookie
-  console.log(parsedCookies, "aAAAAAAAAAAAAAAAAAAAAAA")
+  console.log(parsedCookies)
 
   return {
     props: {
@@ -23,7 +23,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 function MyApp({ Component, pageProps }: AppProps, { data }: any) {
-  console.log(data, "cookies ehuehuehue")
+  console.log(data, "cookies")
   return (
     <>
       <ApiProvider api={extendedApi}>

@@ -10,6 +10,7 @@ export const saveCharacter = (characterId: number) => {
   }
 };
 
-export const getCharactersFromUser = (userEmail: string) => {
-  store.dispatch(extendedApi.endpoints.getCharacters.initiate({ userEmail }));
+export const getCharactersFromUser = async (userEmail: string) => {
+  let a = await store.dispatch(extendedApi.endpoints.getCharacters.initiate(userEmail));
+  console.log(a.data.characters, "a");
 };

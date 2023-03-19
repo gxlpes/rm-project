@@ -46,9 +46,9 @@ export async function getStaticProps(context: GetStaticPropsContext) {
 }
 
 const ListCharacter: NextPage = ({ data }: any) => {
-    const { results, info } = data;
+    const { results, info } = data
     const router = useRouter();
-    const charactersArray = useSelector((state: any) => state.store.characters);
+    const charactersArray = useSelector((state: any) => state.characters);
     console.log(charactersArray, "array")
 
     const handleOnSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -67,14 +67,13 @@ const ListCharacter: NextPage = ({ data }: any) => {
 
                     <ul className={styles.grid}>
                         {results.map((character: Character) => {
-                            return (<CharacterCard key={character.id} character={character} saved={charactersArray.includes(character.id)} />)
+                            return (<CharacterCard key={character.id} character={character} saved={charactersArray.characters.includes(character.id)} />)
                         })}
                     </ul>
                 </main>
                 <Paginate />
             </PaginateContextProvider >
         </>
-
     )
 }
 

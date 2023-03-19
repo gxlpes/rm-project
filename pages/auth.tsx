@@ -1,9 +1,11 @@
 import { NextPage } from 'next';
 import { useDispatch } from 'react-redux';
-import { setCredentials } from '../src/app/features/authSlice';
+import { authUser } from '../src/app/features/authSlice';
+import { addCharactersFromUser } from '../src/app/features/charactersSlice';
 import { showNotification } from '../src/app/features/notificationSlice';
-import { useLoginMutation, useSignupMutation } from '../src/app/services/extendedApi';
+import { useGetCharactersQuery, useLoginMutation, useSignupMutation } from '../src/app/services/extendedApi';
 import AuthForm from '../src/components/ui/AuthForm';
+import { getCharactersFromUser } from '../src/lib/characters';
 import { UserCredentials } from '../src/types/api/backend/User';
 
 const AuthPage: NextPage = () => {
@@ -18,8 +20,9 @@ const AuthPage: NextPage = () => {
         try {
             const user = isLogin ? await loginUser(userCredentials).unwrap() : await signUser(userCredentials).unwrap()
             dispatch(showNotification({ title: "Success!", message: "You are logged!", status: "success" }))
-            dispatch(setCredentials(user))
-
+            dispatch(authUser(user))
+            const test = getCharactersFromUser(user.user.email);
+            console.log(test)
         } catch (error) {
             console.error(error)
             dispatch(showNotification({ title: "Error!", message: "Something went wrong!", status: "error" }))
